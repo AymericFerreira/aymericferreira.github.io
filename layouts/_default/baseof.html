@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="{{ or .Site.Language.Lang "en" }}" data-theme="dark">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{ partial "header.html" . }}
+  <main class="container" id="main">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{ partial "terminal.html" . }}
+  <script src="{{ "js/terminal.js" | relURL }}" defer></script>
+</body>
+</html>

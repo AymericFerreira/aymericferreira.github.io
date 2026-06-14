@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="{{ "/" | relURL }}">
+      <span class="brand__prompt">~/</span><span class="brand__name">feitanborr</span><span class="brand__cursor" aria-hidden="true"></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="{{ "/posts/" | relURL }}">posts</a>
+      <a href="{{ "/index.xml" | relURL }}">rss</a>
+      <a href="{{ .Site.Params.github }}" rel="me noopener noreferrer" target="_blank">github</a>
+      <button type="button" class="term-btn" id="terminal-toggle" aria-haspopup="dialog" aria-controls="terminal" aria-expanded="false">
+        <span class="term-btn__glyph" aria-hidden="true">&gt;_</span>
+        <span>terminal</span>
+        <kbd aria-hidden="true">`</kbd>
+      </button>
+    </nav>
+  </div>
+</header>

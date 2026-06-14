@@ -1,0 +1,15 @@
+{{- /* Build-time index of every post, consumed by static/js/terminal.js.
+       Regenerated on every Hugo build, so the terminal never needs hand-editing. */ -}}
+{{- $posts := slice -}}
+{{- range (where .Site.RegularPages "Section" "posts").ByDate.Reverse -}}
+  {{- $posts = $posts | append (dict
+      "title"   .Title
+      "slug"    .File.ContentBaseName
+      "url"     .RelPermalink
+      "date"    (.Date.Format "2006-01-02")
+      "tags"    (.Params.tags | default slice)
+      "summary" (.Summary | plainify | strings.TrimSpace)
+      "content" (.Plain | strings.TrimSpace)
+  ) -}}
+{{- end -}}
+{{- dict "generated" (now.Format "2006-01-02T15:04:05Z07:00") "count" (len $posts) "posts" $posts | jsonify (dict "prefix" "" "indent" "  ") -}}

@@ -1,0 +1,33 @@
+{{ define "main" }}
+<section class="hero">
+  <p class="hero__eyebrow">// personal dev blog</p>
+  <h1 class="hero__title">Aymeric&nbsp;Ferreira</h1>
+  <p class="hero__lead">{{ .Site.Params.description }}</p>
+  <p class="hero__hint">
+    Browse the normal way below, or press <kbd>`</kbd> /
+    <button class="inline-link" type="button" data-open-terminal>open the terminal</button>
+    and run <code>cd posts &amp;&amp; ls</code>.
+  </p>
+</section>
+
+<section class="post-list" aria-label="Recent posts">
+  <h2 class="section-title"><span class="section-title__mark">$</span> recent posts</h2>
+  <ul class="posts">
+    {{ range first 10 (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+    <li class="post-item">
+      <div class="post-item__head">
+        <a class="post-item__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <time class="post-item__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      </div>
+      {{ with .Summary }}<p class="post-item__summary">{{ . | plainify | truncate 180 }}</p>{{ end }}
+      {{ with .Params.tags }}
+      <ul class="taglist">{{ range . }}<li>#{{ . }}</li>{{ end }}</ul>
+      {{ end }}
+    </li>
+    {{ else }}
+    <li class="post-item"><p class="muted">No posts yet. Add one in <code>content/posts/</code>.</p></li>
+    {{ end }}
+  </ul>
+  <p class="post-list__more"><a href="{{ "/posts/" | relURL }}">all posts →</a></p>
+</section>
+{{ end }}

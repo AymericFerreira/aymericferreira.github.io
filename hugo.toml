@@ -1,0 +1,33 @@
+baseURL = "https://feitanborr.com/"
+defaultContentLanguage = "en"
+title = "feitanborr"
+enableRobotsTXT = true
+enableGitInfo = false
+
+# The home page emits an extra JSON representation (/index.json) that the
+# in-browser terminal reads. Adding HTML/RSS/JSON here is what wires that up;
+# the actual shape is defined in layouts/index.json.
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  author = "Aymeric Ferreira"
+  description = "Personal dev blog — notes on code, tools, and the occasional terminal trick."
+  github = "https://github.com/AymericFerreira"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    # Inline styles using a GitHub-dark Chroma theme so code blocks match the
+    # palette without shipping a separate highlight stylesheet.
+    noClasses = true
+    style = "github-dark"
+    tabWidth = 2
+    lineNos = false
+
+[taxonomies]
+  tag = "tags"
+
+[pagination]
+  pagerSize = 10

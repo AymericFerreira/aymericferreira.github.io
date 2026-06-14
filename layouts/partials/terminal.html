@@ -1,0 +1,25 @@
+{{/*
+  The interactive terminal. data-index points at the build-time JSON feed so the
+  path stays correct regardless of baseURL; data-user seeds the prompt + whoami.
+*/}}
+<div class="terminal" id="terminal" role="dialog" aria-modal="false"
+     aria-label="Interactive terminal" aria-hidden="true"
+     data-index='{{ "index.json" | relURL }}'
+     data-user="aymericferreira" data-host="feitanborr">
+  <div class="terminal__window" role="document">
+    <div class="terminal__bar">
+      <span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="terminal__title">aymericferreira@feitanborr: ~ — zsh</span>
+      <button type="button" class="terminal__close" id="terminal-close" aria-label="Close terminal (Esc)">✕</button>
+    </div>
+    <div class="terminal__screen" id="terminal-screen" tabindex="-1">
+      <div class="terminal__output" id="terminal-output" aria-live="polite"></div>
+      <div class="terminal__inputline">
+        <span class="terminal__prompt" id="terminal-prompt"></span>
+        <input class="terminal__input" id="terminal-input" type="text"
+               autocomplete="off" autocapitalize="off" autocorrect="off"
+               spellcheck="false" aria-label="Terminal command input">
+      </div>
+    </div>
+  </div>
+</div>
