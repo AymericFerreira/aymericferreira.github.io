@@ -5,29 +5,37 @@ draft: false
 tags: ["meta", "hugo"]
 ---
 
-Welcome to the blog. This is the obligatory first post — partly a placeholder,
-partly a test that the whole pipeline actually works end to end.
+This is the first post on the blog. It has two purposes: to describe how the
+site is built, and to confirm that the whole pipeline works, from writing a
+file to publishing it.
 
 <!--more-->
 
 The site is built with [Hugo](https://gohugo.io) (extended) and a small,
-hand-written theme. No third-party theme, no build step beyond `hugo` itself.
-The palette is straight GitHub-dark, everything is set in a monospace stack,
-and the only real flourish is the terminal you can pop open with the backtick
-key.
+hand-written theme. There is no third-party theme and no build step beyond
+`hugo` itself. The palette follows GitHub dark, the text is set in a monospace
+stack, and the main feature is the terminal that opens with the backtick key.
 
-## Why bother with a terminal?
+## Browsing with the keyboard
 
-Because it's fun, and because it doubles as a genuinely useful index. The
-terminal reads a build-time `/index.json` that Hugo regenerates on every build,
-so it always knows about every post without me touching any JavaScript.
+The terminal has a clear purpose. The goal is to read the whole blog without
+leaving the keyboard. Posts can be listed, read, and opened with a few short
+commands, in the same way a developer moves around a file system.
 
 ```bash
-# the commands that matter
 cd posts
 ls
 cat hello-world
 open hello-world
 ```
 
-That's the whole trick. The rest is just styling.
+The terminal reads an `/index.json` file that Hugo regenerates on every build.
+It therefore knows about every post automatically, and no JavaScript needs to
+be updated by hand when a post is added.
+
+## Summary
+
+This first post is short by design. It sets out the two ideas behind the site:
+a simple, hand-written theme, and a terminal that makes the blog navigable from
+the keyboard alone. The posts that follow aim to be interesting to read, and
+not only useful.

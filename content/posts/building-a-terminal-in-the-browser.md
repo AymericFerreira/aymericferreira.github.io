@@ -5,16 +5,17 @@ draft: false
 tags: ["javascript", "hugo", "ui"]
 ---
 
-The terminal widget on this site is intentionally small: a few hundred lines of
-vanilla JavaScript, no framework, no dependencies. Here's how the pieces fit.
+The terminal widget on this site is written in a few hundred lines of vanilla
+JavaScript, with no framework and no dependencies. This post describes how the
+parts fit together.
 
 <!--more-->
 
 ## The data layer
 
-Everything starts with `/index.json`. Hugo's `[outputs]` config tells it to
-render the home page as JSON in addition to HTML and RSS, and a tiny
-`layouts/index.json` template controls the shape:
+Everything starts with `/index.json`. Hugo's `[outputs]` configuration tells it
+to render the home page as JSON in addition to HTML and RSS. A small
+`layouts/index.json` template controls the shape of that file:
 
 ```go-html-template
 {{ $posts := slice }}
@@ -29,13 +30,15 @@ render the home page as JSON in addition to HTML and RSS, and a tiny
 {{ $posts | jsonify }}
 ```
 
-The browser fetches that once, the first time the terminal opens, and caches it
-for the rest of the session.
+The browser fetches this file once, the first time the terminal opens, and
+keeps it in memory for the rest of the session. A single request is enough,
+since the content does not change between builds.
 
 ## The command loop
 
-A command is just a line of text. Split it on whitespace, look up the first
-token in a `COMMANDS` map, and call the handler with the remaining args:
+A command is a single line of text. The line is split on whitespace, the first
+token is looked up in a `COMMANDS` map, and the matching handler runs with the
+remaining arguments:
 
 ```js
 function run(raw) {
@@ -44,12 +47,14 @@ function run(raw) {
 }
 ```
 
-History is an array; the up/down arrows just walk an index into it. `cat` prints
-a post's plain text inline, `open` does a `window.location` navigation. That's
-genuinely all there is to it.
+History is stored as an array, and the up and down arrows move an index along
+it. The `cat` command prints the plain text of a post inline, while `open`
+performs a `window.location` navigation. The full behaviour fits in these few
+rules.
 
-## Lessons
+## Summary
 
-- Keep state tiny. A current-directory string and a history array cover it.
-- Let the static site generator own the data. The terminal never goes stale
-  because it can't — it reads whatever Hugo last built.
+The design relies on two ideas. First, the state stays minimal: a
+current-directory string and a history array are enough to describe it. Second,
+the static site generator owns the data, so the terminal reads whatever Hugo
+produced at the last build and does not fall out of date.

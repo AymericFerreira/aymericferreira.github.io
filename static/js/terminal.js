@@ -93,7 +93,7 @@
         '  <span class="term-accent">whoami</span>          short bio',
         '  <span class="term-accent">clear</span>           clear the screen',
         '',
-        '<span class="term-muted">↑/↓ history · Tab completes slugs · ` toggles · Esc closes</span>'
+        '<span class="term-muted">↑/↓ history · Tab completes commands, folders, posts · ` toggles · Esc closes</span>'
       ].join("\n").replace(/\n/g, "<br>"));
     },
 
@@ -184,25 +184,43 @@
     });
   }
 
+  // Complete parts[idx] against a list of candidates. A single match is filled
+  // in (with a trailing space for commands); several matches fill the longest
+  // common prefix and list the options, the way a real shell does.
+  function complete(parts, idx, candidates, trailingSpace) {
+    var frag = parts[idx] || "";
+    var matches = candidates.filter(function (c) { return c.indexOf(frag) === 0; });
+    if (!matches.length) return;
+    if (matches.length === 1) {
+      parts[idx] = matches[0];
+      input.value = parts.join(" ") + (trailingSpace ? " " : "");
+      return;
+    }
+    var prefix = matches[0];
+    matches.forEach(function (m) {
+      while (m.indexOf(prefix) !== 0) { prefix = prefix.slice(0, -1); }
+    });
+    parts[idx] = prefix;
+    input.value = parts.join(" ");
+    printText(matches.join("   "), "term-muted");
+  }
+
+  // Directories reachable from the current one, for `cd` completion.
+  function dirNames() {
+    return cwd === "~" ? ["posts"] : [".."];
+  }
+
   function autocomplete() {
     var parts = input.value.split(/\s+/);
     if (parts.length <= 1) {
       var names = Object.keys(COMMANDS).filter(function (n) { return n[0] !== "_"; });
-      var m = names.filter(function (n) { return n.indexOf(parts[0]) === 0; });
-      if (m.length === 1) { input.value = m[0] + " "; }
-      else if (m.length > 1) { printText(m.join("   "), "term-muted"); }
+      complete(parts, 0, names, true);
     } else {
       var cmd = parts[0].toLowerCase();
       if (cmd === "cat" || cmd === "open") {
-        var frag = parts[parts.length - 1];
-        var slugs = posts.map(function (p) { return p.slug; })
-          .filter(function (s) { return s.indexOf(frag) === 0; });
-        if (slugs.length === 1) {
-          parts[parts.length - 1] = slugs[0];
-          input.value = parts.join(" ");
-        } else if (slugs.length > 1) {
-          printText(slugs.join("   "), "term-muted");
-        }
+        complete(parts, parts.length - 1, posts.map(function (p) { return p.slug; }), false);
+      } else if (cmd === "cd") {
+        complete(parts, parts.length - 1, dirNames(), false);
       }
     }
     caretEnd();
