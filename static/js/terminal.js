@@ -99,17 +99,18 @@
 
     ls: function () {
       if (cwd === "~") {
-        printHTML('<span class="term-dir">posts/</span>');
+        printHTML('<span class="term-dir" data-cmd="cd posts">posts/</span>');
         return;
       }
       if (loadError) { printText("ls: could not read /index.json", "term-err"); return; }
       if (!posts.length) { printText("(no posts yet)", "term-muted"); return; }
       var rows = posts.map(function (p) {
-        return '<span class="term-file">' + esc(p.slug) + '</span>'
+        return '<span class="term-file" data-cmd="open ' + esc(p.slug) + '">' + esc(p.slug) + '</span>'
              + '   <span class="term-muted">' + esc(p.date || "") + "</span>"
              + "   " + esc(p.title);
       });
       printHTML(rows.join("<br>"));
+      printText("click a name to open it, or run cat/open <slug>", "term-muted");
     },
 
     cd: function (args) {
@@ -343,6 +344,15 @@
     if (e.target === term) { closeTerminal(); return; }
   });
   screen.addEventListener("click", function () { input.focus(); });
+
+  // Clickable `ls` entries: run the command stashed in data-cmd (e.g. "open
+  // <slug>" for a post, "cd posts" for the directory).
+  output.addEventListener("click", function (e) {
+    var el = e.target.closest && e.target.closest("[data-cmd]");
+    if (!el) return;
+    e.preventDefault();
+    run(el.getAttribute("data-cmd"));
+  });
 
   // global keys: ` to open (when not typing elsewhere), Esc to close.
   document.addEventListener("keydown", function (e) {
