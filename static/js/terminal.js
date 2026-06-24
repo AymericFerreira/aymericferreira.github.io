@@ -270,6 +270,16 @@
     }
   });
 
+  // Keyboards with a grave-accent dead key (French and similar layouts) can
+  // leak a leading "`" into the field just after the backtick opens the
+  // terminal, turning "ls" into "`ls". No command starts with a backtick, so
+  // drop any that appear at the start of the line.
+  input.addEventListener("input", function () {
+    if (input.value.charCodeAt(0) === 96) {
+      input.value = input.value.replace(/^`+/, "");
+    }
+  });
+
   /* ----- open / close --------------------------------------------------- */
   function boot() {
     printHTML('<span class="term-accent">feitanborr</span> '
