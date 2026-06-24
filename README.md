@@ -1,10 +1,10 @@
-# feitanborr
+# Aymeric Ferreira
 
-Personal dev blog. [Hugo](https://gohugo.io) (extended) + a hand-rolled dark
-theme — no third-party theme. GitHub-dark palette, monospace throughout, and an
-interactive terminal you can pop open with the backtick (`` ` ``) key.
+Personal dev blog. [Hugo](https://gohugo.io) (extended) with a hand-rolled dark
+theme and no third-party theme. GitHub-dark palette, monospace throughout, and
+an interactive terminal you can open with the backtick (`` ` ``) key.
 
-Live at **https://feitanborr.com**.
+Live at **https://aymericferreira.github.io/**.
 
 ## Local development
 
@@ -29,9 +29,9 @@ hugo server
 hugo new posts/my-new-post.md
 ```
 
-Edit the file, set `draft: false`, and the post automatically appears in the
-home list, `/posts/`, the RSS feed, **and** the terminal — no manual upkeep,
-because the terminal reads `/index.json`, which Hugo regenerates every build.
+Edit the file, set `draft: false`, and the post appears in the home list,
+`/posts/`, the RSS feed, and the terminal. There is no manual upkeep, because
+the terminal reads `/index.json`, which Hugo regenerates on every build.
 
 ## How the terminal works
 
@@ -40,7 +40,8 @@ because the terminal reads `/index.json`, which Hugo regenerates every build.
 - `static/js/terminal.js` fetches that JSON the first time the terminal opens.
 
 Commands: `help`, `ls`, `cd posts`, `cd ~`, `cat <slug>`, `open <slug>`,
-`whoami`, `clear`. Arrow keys walk history; Tab completes slugs.
+`whoami`, `clear`. Arrow keys walk history. Tab completes commands, folders,
+and post slugs.
 
 ## Customizing the look
 
@@ -53,48 +54,18 @@ swappable accent token:
 
 ## Deployment
 
+This is a **user site**: the repository is named
+`AymericFerreira/aymericferreira.github.io`, so it serves at the root
+`https://aymericferreira.github.io/` with no path prefix.
+
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with
-Hugo and publishes via the official `actions/deploy-pages` workflow.
+Hugo and publishes through `actions/deploy-pages`.
 
-### One-time GitHub setup
+### GitHub setup
 
-This repo is set up as a **project repo**: `AymericFerreira/feitanborr`.
-(See "Repo choice" below for why.)
-
-1. Create the repo `AymericFerreira/feitanborr` and push this directory to it.
-2. In **Settings → Pages → Build and deployment**, set **Source = GitHub
-   Actions**.
-3. In **Settings → Pages → Custom domain**, enter `feitanborr.com` and enable
-   **Enforce HTTPS**. (`static/CNAME` already pins this so the setting sticks
-   across deploys.)
-
-### DNS (at your domain registrar)
-
-| Type  | Host  | Value                                                            |
-| ----- | ----- | --------------------------------------------------------------- |
-| A     | `@`   | `185.199.108.153`                                               |
-| A     | `@`   | `185.199.109.153`                                               |
-| A     | `@`   | `185.199.110.153`                                               |
-| A     | `@`   | `185.199.111.153`                                               |
-| AAAA  | `@`   | `2606:50c0:8000::153`                                           |
-| AAAA  | `@`   | `2606:50c0:8001::153`                                           |
-| AAAA  | `@`   | `2606:50c0:8002::153`                                           |
-| AAAA  | `@`   | `2606:50c0:8003::153`                                           |
-| CNAME | `www` | `aymericferreira.github.io`                                     |
-
-The apex (`feitanborr.com`) uses GitHub Pages' A/AAAA records; `www` is a CNAME
-to `aymericferreira.github.io` regardless of which repo serves the site.
-
-## Repo choice: project repo vs. user repo
-
-Decided up front: **project repo (`AymericFerreira/feitanborr`)**.
-
-- With the custom domain `feitanborr.com`, a project repo serves at the domain
-  root exactly like a user site would — there is no `/feitanborr/` path prefix.
-- It keeps the `AymericFerreira.github.io` name free for anything else later.
-- The `www` DNS CNAME target is `aymericferreira.github.io` either way, so this
-  choice has no DNS consequence.
-
-To switch to the user repo instead, just push this same directory to a repo
-named `AymericFerreira.github.io`; nothing in the config or workflow changes.
-```
+1. In **Settings → Pages → Build and deployment**, set **Source = GitHub
+   Actions**. This is required. The default "Deploy from a branch" runs a Jekyll
+   build that fails on Hugo's Go templates.
+2. No custom domain is used. The site is served on the default
+   `aymericferreira.github.io` host, with HTTPS enforced.
+3. On the free plan the repository must be **public** for Pages to publish.

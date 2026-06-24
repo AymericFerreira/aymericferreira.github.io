@@ -1,5 +1,5 @@
 /* =========================================================================
-   feitanborr — interactive terminal
+   aymeric — interactive terminal
    Vanilla JS, no dependencies. Reads the build-time /index.json so the list of
    posts is always in sync with whatever Hugo last built.
    ========================================================================= */
@@ -271,18 +271,27 @@
   });
 
   // Keyboards with a grave-accent dead key (French and similar layouts) can
-  // leak a leading "`" into the field just after the backtick opens the
-  // terminal, turning "ls" into "`ls". No command starts with a backtick, so
-  // drop any that appear at the start of the line.
-  input.addEventListener("input", function () {
-    if (input.value.charCodeAt(0) === 96) {
-      input.value = input.value.replace(/^`+/, "");
+  // leak a stray grave/accent character into the field when the backtick opens
+  // the terminal, turning "ls" into "`ls". None of these are valid in a command
+  // or slug, so strip them. Dead keys often arrive through IME composition,
+  // where a value set during "input" is reverted, so also clean up on
+  // compositionend.
+  var STRAY_RE = /[`´ˋ̀́]/g;
+  function stripStray() {
+    var cleaned = input.value.replace(STRAY_RE, "");
+    if (cleaned !== input.value) {
+      input.value = cleaned;
+      caretEnd();
     }
+  }
+  input.addEventListener("input", function (e) {
+    if (!e.isComposing) stripStray();
   });
+  input.addEventListener("compositionend", stripStray);
 
   /* ----- open / close --------------------------------------------------- */
   function boot() {
-    printHTML('<span class="term-accent">feitanborr</span> '
+    printHTML('<span class="term-accent">aymeric</span> '
       + '<span class="term-muted">// interactive terminal · reading ' + esc(indexURL) + "</span>");
     if (loadError) {
       printText("warning: could not load the post index — post commands are unavailable.", "term-err");
