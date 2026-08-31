@@ -87,7 +87,7 @@ install. Different style, same result.
 
 Now the actual install.
 
-## Windows does not want you to leave
+## Leaving Windows took longer than expected
 
 BitLocker was enabled on every disk, and every disk had to be decrypted before
 anything else could happen.
@@ -99,10 +99,10 @@ progress bar: one of my HDDs alone took 18 hours.
 
 Then the shrink. I had around 1.6 TB free. Windows offered me 300 GB.
 
-Not 1.5 TB. Not a round 1 TB. 300 GB, take it or leave it. The usual
-explanation is unmovable files sitting at the end of the volume, page file,
-hibernation, shadow copies, but I never got a clear answer out of it. I took
-the 300 GB and told myself I would deal with the rest later.
+Not 1.5 TB. Not a round 1 TB. 300 GB, with no option to ask for more. The
+usual explanation is unmovable files sitting at the end of the volume, page
+file, hibernation, shadow copies, but I never got a clear answer out of it. I
+took the 300 GB and told myself I would deal with the rest later.
 
 The install on that partition finished cleanly, and then would not boot.
 
@@ -237,9 +237,10 @@ With this I really had the feeling of WSL in reverse.
 ## Where I landed
 
 The install was the easy part, Windows was the hard part. BitLocker and that
-absurd 300 GB shrink took more than a day, and the fix I chose was to stop
-negotiating and hand over the whole disk. Everything after that was uneventful
-in the best way. Screen, GPU and racing wheel all worked on the first boot.
+absurd 300 GB shrink took more than a day, and what solved it was to stop
+trying to keep both systems and give the whole disk to Omarchy. Everything
+after that was uneventful in the best way. Screen, GPU and racing wheel all
+worked on the first boot.
 
 What it costs me is League of Legends, and one call to someone about a VPN
 configuration.
