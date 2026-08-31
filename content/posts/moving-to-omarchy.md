@@ -17,25 +17,27 @@ Here is honestly everything I still did on Windows.
 Almost nothing. Every real task had slowly moved into WSL, one terminal at a
 time, until Windows was mostly a bootloader with a taskbar. I was using it to
 start a Linux I was already living in. The only thing left that really needed
-Windows was League of Legends.
+Windows was gaming, and League of Legends in particular.
 
 And it felt slow. Not broken, not crashing, just slow in a way that is hard to
 describe or measure. An R7 3700X, a 3060 Ti, an NVMe drive and 48 GB of RAM,
 and I would still watch a window think about whether it wanted to open.
-Windows was fine, the machine was fine, but it never felt right.
+Windows was fine, the machine was fine, but it never felt like the right
+match.
 
 So at first I only wanted a dual boot.
 
 ## Why I never switched
 
 I know Debian. I have installed it many times, mostly at work, usually on a
-machine nobody else wanted. It is boring and it is solid, and those two things
-come together. It does not surprise you and it does not excite you. It is
-perfect for running things over SSH: an old machine, you install it, you start
-a recurring task or a script, and you forget about it. As a desktop it gives
-me nothing.
+machine nobody else wanted. My personal experience with it is that it is
+boring and it is solid, and those two things come together. It does not
+surprise you and it does not excite you. It is perfect for running things over
+SSH: an old machine, you install it, you start a recurring task or a script,
+and you forget about it. As a desktop it gives me nothing.
 
-That is the trap. I could always picture the install, never the week after it.
+That is the trap. I could always picture the install, never the week after it,
+because it was never my main machine.
 What I could not picture was sitting down and deciding what my desktop should
 be, because I genuinely do not know. I do not know what I want. I do not know
 what exists. And I am not going to spend three evenings reading window manager
@@ -59,14 +61,13 @@ I did not want to make choices. I wanted to inherit good ones.
 
 ## The part where I have to talk about DHH
 
-And now I have to say the other thing, because I would want to be told.
+I need to say a few words about DHH, for the people who do not know him.
 
-Omarchy comes out of 37signals, and DHH is loud. He is invited on every
-podcast and every YouTube channel, he has strong opinions about almost
-everything, and most of those opinions are far from what he actually knows.
-Some of that is only the usual tech founder posture, tiring and harmless. Some
-of it is not. What he wrote about immigration, in particular the London piece,
-went far beyond a provocative opinion.
+Omarchy comes out of 37signals, the company DHH joined. And DHH is loud. He is
+invited on every podcast and every YouTube channel, and he has strong opinions
+about almost everything. Some of them are only the usual tech founder posture,
+tiring but harmless. Some are not. What he wrote about immigration, in
+particular the London piece, went far beyond a provocative opinion.
 
 If you prefer to read it rather than take my word for it, there is a
 [detailed summary at LibreNews](https://thelibre.news/lets-talk-about-dhh/)
