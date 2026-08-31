@@ -6,7 +6,7 @@ tags: ["linux", "omarchy", "hyprland", "gaming"]
 ---
 
 I had been running Windows out of habit for years, which is the worst reason
-to run anything. Last week I wiped it.
+to run anything. This weekend I wiped it.
 
 <!--more-->
 
@@ -152,7 +152,7 @@ Simple, fast, and you never have to touch the mouse again.
 
 ## Onboarding
 
-The keybindings menu is what made the first week easy. Every time I wondered
+The keybindings menu is what made the first hours easy. Every time I wondered
 "how do I open this?", the shortcut list had the answer, and I did not have to
 search for it anywhere else.
 
