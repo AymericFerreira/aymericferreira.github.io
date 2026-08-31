@@ -94,8 +94,11 @@ anything else could happen.
 
 There is no trick here. You start it, you watch a percentage, you go and do
 something else. It is by far the longest step of the whole migration, and it
-happens before you have installed anything at all. Plan a full day for a
-progress bar: one of my HDDs alone took 18 hours.
+happens before you have installed anything at all.
+
+The SSDs were reasonable, two or three hours each. One of my hard drives took
+eighteen hours on its own, and I still do not know why. So plan a full day,
+and do not trust the first disk to tell you how long the next one will take.
 
 Then the shrink. I had around 1.6 TB free. Windows offered me 300 GB.
 
